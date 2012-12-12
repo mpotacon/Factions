@@ -46,32 +46,32 @@ public class CmdHome extends FCommand
 		// TODO: Hide this command on help also.
 		if ( ! Conf.homesEnabled)
 		{
-			fme.msg("<b>Sorry, Faction homes are disabled on this server.");
+			fme.msg("<b>Sorry, Gang homes are disabled on this server.");
 			return;
 		}
 
 		if ( ! Conf.homesTeleportCommandEnabled)
 		{
-			fme.msg("<b>Sorry, the ability to teleport to Faction homes is disabled on this server.");
+			fme.msg("<b>Sorry, the ability to teleport to Gang homes is disabled on this server.");
 			return;
 		}
 		
-		if ( ! myFaction.hasHome())
+		if ( ! myGang.hasHome())
 		{
-			fme.msg("<b>Your faction does not have a home. " + (fme.getRole().isLessThan(Rel.OFFICER) ? "<i> Ask your leader to:" : "<i>You should:"));
+			fme.msg("<b>Your gang does not have a home. " + (fme.getRole().isLessThan(Rel.OFFICER) ? "<i> Ask your leader to:" : "<i>You should:"));
 			fme.sendMessage(p.cmdBase.cmdSethome.getUseageTemplate());
 			return;
 		}
 		
 		if ( ! Conf.homesTeleportAllowedFromEnemyTerritory && fme.isInEnemyTerritory())
 		{
-			fme.msg("<b>You cannot teleport to your faction home while in the territory of an enemy faction.");
+			fme.msg("<b>You cannot teleport to your gang home while in the territory of an enemy gang.");
 			return;
 		}
 		
-		if ( ! Conf.homesTeleportAllowedFromDifferentWorld && me.getWorld().getUID() != myFaction.getHome().getWorld().getUID())
+		if ( ! Conf.homesTeleportAllowedFromDifferentWorld && me.getWorld().getUID() != myGang.getHome().getWorld().getUID())
 		{
-			fme.msg("<b>You cannot teleport to your faction home while in a different world.");
+			fme.msg("<b>You cannot teleport to your gang home while in a different world.");
 			return;
 		}
 		
@@ -120,16 +120,16 @@ public class CmdHome extends FCommand
 				if (dx > max || dy > max || dz > max)
 					continue;
 
-				fme.msg("<b>You cannot teleport to your faction home while an enemy is within " + Conf.homesTeleportAllowedEnemyDistance + " blocks of you.");
+				fme.msg("<b>You cannot teleport to your gang home while an enemy is within " + Conf.homesTeleportAllowedEnemyDistance + " blocks of you.");
 				return;
 			}
 		}
 
 		// if Essentials teleport handling is enabled and available, pass the teleport off to it (for delay and cooldown)
-		if (EssentialsFeatures.handleTeleport(me, myFaction.getHome())) return;
+		if (EssentialsFeatures.handleTeleport(me, myGang.getHome())) return;
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostHome, "to teleport to your faction home", "for teleporting to your faction home")) return;
+		if ( ! payForCommand(Conf.econCostHome, "to teleport to your gang home", "for teleporting to your gang home")) return;
 
 		// Create a smoke effect
 		if (Conf.homesTeleportCommandSmokeEffectEnabled)
@@ -137,12 +137,12 @@ public class CmdHome extends FCommand
 			List<Location> smokeLocations = new ArrayList<Location>();
 			smokeLocations.add(loc);
 			smokeLocations.add(loc.add(0, 1, 0));
-			smokeLocations.add(myFaction.getHome());
-			smokeLocations.add(myFaction.getHome().clone().add(0, 1, 0));
+			smokeLocations.add(myGang.getHome());
+			smokeLocations.add(myGang.getHome().clone().add(0, 1, 0));
 			SmokeUtil.spawnCloudRandom(smokeLocations, 3f);
 		}
 
-		me.teleport(myFaction.getHome());
+		me.teleport(myGang.getHome());
 	}
 	
 }

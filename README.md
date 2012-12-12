@@ -1,3 +1,5 @@
+Updated to say Gang
+
 Factions - Guilding and user-controlled antigrief plugin for Minecraft
 ====================
 This plugin will allow the players on the server to create factions/guilds. The factions can claim territory that will be protected from non-members. Factions can forge alliances and declare themselves enemies with others. Land may be taken from other factions through war.

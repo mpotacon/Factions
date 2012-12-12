@@ -13,7 +13,7 @@ public class CmdMoneyBalance extends FCommand
 		this.aliases.add("balance");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		
 		this.permission = Permission.MONEY_BALANCE.node;
 		this.setHelpShort("show faction balance");
@@ -27,14 +27,14 @@ public class CmdMoneyBalance extends FCommand
 	@Override
 	public void perform()
 	{
-		Faction faction = myFaction;
+		Faction faction = myGang;
 		if (this.argIsSet(0))
 		{
 			faction = this.argAsFaction(0);
 		}
 			
 		if (faction == null) return;
-		if (faction != myFaction && ! Permission.MONEY_BALANCE_ANY.has(sender, true)) return;
+		if (faction != myGang && ! Permission.MONEY_BALANCE_ANY.has(sender, true)) return;
 		
 		Econ.sendBalanceInfo(fme, faction);
 	}

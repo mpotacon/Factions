@@ -17,7 +17,7 @@ public abstract class FRelationCommand extends FCommand
 	public FRelationCommand()
 	{
 		super();
-		this.requiredArgs.add("faction");
+		this.requiredArgs.add("gang");
 		//this.optionalArgs.put("", "");
 		
 		this.permission = Permission.RELATION.node;
@@ -41,13 +41,13 @@ public abstract class FRelationCommand extends FCommand
 			return;
 		}*/
 		
-		if (them == myFaction)
+		if (them == myGang)
 		{
 			msg("<b>Nope! You can't declare a relation to yourself :)");
 			return;
 		}
 
-		if (myFaction.getRelationWish(them) == targetRelation)
+		if (myGang.getRelationWish(them) == targetRelation)
 		{
 			msg("<b>You already have that relation wish set with %s.", them.getTag());
 			return;
@@ -57,44 +57,44 @@ public abstract class FRelationCommand extends FCommand
 		if ( ! payForCommand(targetRelation.getRelationCost(), "to change a relation wish", "for changing a relation wish")) return;
 
 		// try to set the new relation
-		Rel oldRelation = myFaction.getRelationTo(them, true);
-		myFaction.setRelationWish(them, targetRelation);
-		Rel currentRelation = myFaction.getRelationTo(them, true);
+		Rel oldRelation = myGang.getRelationTo(them, true);
+		myGang.setRelationWish(them, targetRelation);
+		Rel currentRelation = myGang.getRelationTo(them, true);
 
 		// if the relation change was successful
 		if (targetRelation == currentRelation)
 		{
 			// trigger the faction relation event
-			FactionRelationEvent relationEvent = new FactionRelationEvent(myFaction, them, oldRelation, currentRelation);
+			FactionRelationEvent relationEvent = new FactionRelationEvent(myGang, them, oldRelation, currentRelation);
 			Bukkit.getServer().getPluginManager().callEvent(relationEvent);
 
-			them.msg("%s<i> is now %s.", myFaction.describeTo(them, true), targetRelation.getDescFactionOne());
-			myFaction.msg("%s<i> is now %s.", them.describeTo(myFaction, true), targetRelation.getDescFactionOne());
+			them.msg("%s<i> is now %s.", myGang.describeTo(them, true), targetRelation.getDescFactionOne());
+			myGang.msg("%s<i> is now %s.", them.describeTo(myGang, true), targetRelation.getDescFactionOne());
 		}
 		// inform the other faction of your request
 		else
 		{
-			them.msg("%s<i> wishes to be %s.", myFaction.describeTo(them, true), targetRelation.getColor()+targetRelation.getDescFactionOne());
-			them.msg("<i>Type <c>/"+Conf.baseCommandAliases.get(0)+" "+targetRelation+" "+myFaction.getTag()+"<i> to accept.");
-			myFaction.msg("%s<i> were informed that you wish to be %s<i>.", them.describeTo(myFaction, true), targetRelation.getColor()+targetRelation.getDescFactionOne());
+			them.msg("%s<i> wishes to be %s.", myGang.describeTo(them, true), targetRelation.getColor()+targetRelation.getDescFactionOne());
+			them.msg("<i>Type <c>/"+Conf.baseCommandAliases.get(0)+" "+targetRelation+" "+myGang.getTag()+"<i> to accept.");
+			myGang.msg("%s<i> were informed that you wish to be %s<i>.", them.describeTo(myGang, true), targetRelation.getColor()+targetRelation.getDescFactionOne());
 		}
 		
 		// TODO: The ally case should work!!
 		//   * this might have to be bumped up to make that happen, & allow ALLY,NEUTRAL only
 		if ( targetRelation != Rel.TRUCE && them.getFlag(FFlag.PEACEFUL))
 		{
-			them.msg("<i>This will have no effect while your faction is peaceful.");
-			myFaction.msg("<i>This will have no effect while their faction is peaceful.");
+			them.msg("<i>This will have no effect while your gang is peaceful.");
+			myGang.msg("<i>This will have no effect while their gang is peaceful.");
 		}
 		
-		if ( targetRelation != Rel.TRUCE && myFaction.getFlag(FFlag.PEACEFUL))
+		if ( targetRelation != Rel.TRUCE && myGang.getFlag(FFlag.PEACEFUL))
 		{
-			them.msg("<i>This will have no effect while their faction is peaceful.");
-			myFaction.msg("<i>This will have no effect while your faction is peaceful.");
+			them.msg("<i>This will have no effect while their gang is peaceful.");
+			myGang.msg("<i>This will have no effect while your gang is peaceful.");
 		}
 
-		SpoutFeatures.updateTitle(myFaction, them);
-		SpoutFeatures.updateTitle(them, myFaction);
+		SpoutFeatures.updateTitle(myGang, them);
+		SpoutFeatures.updateTitle(them, myGang);
 		SpoutFeatures.updateTerritoryDisplayLoc(null);
 	}
 }

@@ -28,21 +28,21 @@ public class CmdOpen extends FCommand
 	public void perform()
 	{
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostOpen, "to open or close the faction", "for opening or closing the faction")) return;
+		if ( ! payForCommand(Conf.econCostOpen, "to open or close the gang", "for opening or closing the gang")) return;
 
-		myFaction.setOpen(this.argAsBool(0, ! myFaction.getOpen()));
+		myGang.setOpen(this.argAsBool(0, ! myGang.getOpen()));
 		
-		String open = myFaction.getOpen() ? "open" : "closed";
+		String open = myGang.getOpen() ? "open" : "closed";
 		
 		// Inform
-		myFaction.msg("%s<i> changed the faction to <h>%s<i>.", fme.describeTo(myFaction, true), open);
+		myGang.msg("%s<i> changed the gang to <h>%s<i>.", fme.describeTo(myGang, true), open);
 		for (Faction faction : Factions.i.get())
 		{
-			if (faction == myFaction)
+			if (faction == myGang)
 			{
 				continue;
 			}
-			faction.msg("<i>The faction %s<i> is now %s", myFaction.getTag(faction), open);
+			faction.msg("<i>The gang %s<i> is now %s", myGang.getTag(faction), open);
 		}
 	}
 	

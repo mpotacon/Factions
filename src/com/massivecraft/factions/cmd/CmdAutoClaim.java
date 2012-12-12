@@ -12,7 +12,7 @@ public class CmdAutoClaim extends FCommand
 		this.aliases.add("autoclaim");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		
 		this.permission = Permission.AUTOCLAIM.node;
 		this.disableOnLock = true;
@@ -26,7 +26,7 @@ public class CmdAutoClaim extends FCommand
 	@Override
 	public void perform()
 	{
-		Faction forFaction = this.argAsFaction(0, myFaction);
+		Faction forFaction = this.argAsFaction(0, myGang);
 		if (forFaction == null || forFaction == fme.getAutoClaimFor())
 		{
 			fme.setAutoClaimFor(null);

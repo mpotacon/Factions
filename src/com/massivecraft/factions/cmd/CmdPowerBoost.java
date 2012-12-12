@@ -12,7 +12,7 @@ public class CmdPowerBoost extends FCommand
 		super();
 		this.aliases.add("powerboost");
 		
-		this.requiredArgs.add("p|f|player|faction");
+		this.requiredArgs.add("p|g|player|gang");
 		this.requiredArgs.add("name");
 		this.requiredArgs.add("#");
 		
@@ -30,14 +30,14 @@ public class CmdPowerBoost extends FCommand
 	{
 		String type = this.argAsString(0).toLowerCase();
 		boolean doPlayer = true;
-		if (type.equals("f") || type.equals("faction"))
+		if (type.equals("g") || type.equals("gang"))
 		{
 			doPlayer = false;
 		}
 		else if (!type.equals("p") && !type.equals("player"))
 		{
-			msg("<b>You must specify \"p\" or \"player\" to target a player or \"f\" or \"faction\" to target a faction.");
-			msg("<b>ex. /f powerboost p SomePlayer 0.5  -or-  /f powerboost f SomeFaction -5");
+			msg("<b>You must specify \"p\" or \"player\" to target a player or \"g\" or \"gang\" to target a gang.");
+			msg("<b>ex. /g powerboost p SomePlayer 0.5  -or-  /g powerboost g SomeGang -5");
 			return;
 		}
 		
@@ -62,7 +62,7 @@ public class CmdPowerBoost extends FCommand
 			Faction targetFaction = this.argAsFaction(1);
 			if (targetFaction == null) return;
 			targetFaction.setPowerBoost(targetPower);
-			target = "Faction \""+targetFaction.getTag()+"\"";
+			target = "Gang \""+targetFaction.getTag()+"\"";
 		}
 
 		msg("<i>"+target+" now has a power bonus/penalty of "+targetPower+" to min and max power levels.");

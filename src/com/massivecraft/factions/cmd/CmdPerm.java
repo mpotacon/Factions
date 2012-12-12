@@ -13,7 +13,7 @@ public class CmdPerm extends FCommand
 		super();
 		this.aliases.add("perm");
 		
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		this.optionalArgs.put("perm", "all");
 		this.optionalArgs.put("relation", "read");
 		this.optionalArgs.put("yes/no", "read");
@@ -32,7 +32,7 @@ public class CmdPerm extends FCommand
 	@Override
 	public void perform()
 	{
-		Faction faction = myFaction;
+		Faction faction = myGang;
 		if (this.argIsSet(0))
 		{
 			faction = this.argAsFaction(0);

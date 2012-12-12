@@ -47,11 +47,11 @@ public class CmdUnclaim extends FCommand
 		//String moneyBack = "<i>";
 		if (Econ.shouldBeUsed())
 		{
-			double refund = Econ.calculateClaimRefund(myFaction.getLandRounded());
+			double refund = Econ.calculateClaimRefund(myGang.getLandRounded());
 			
 			if(Conf.bankEnabled && Conf.bankFactionPaysLandCosts)
 			{
-				if ( ! Econ.modifyMoney(myFaction, refund, "to unclaim this land", "for unclaiming this land")) return;
+				if ( ! Econ.modifyMoney(myGang, refund, "to unclaim this land", "for unclaiming this land")) return;
 			}
 			else
 			{
@@ -61,10 +61,10 @@ public class CmdUnclaim extends FCommand
 
 		Board.removeAt(flocation);
 		SpoutFeatures.updateTerritoryDisplayLoc(flocation);
-		myFaction.msg("%s<i> unclaimed some land.", fme.describeTo(myFaction, true));
+		myGang.msg("%s<i> unclaimed some land.", fme.describeTo(myGang, true));
 
 		if (Conf.logLandUnclaims)
-			P.p.log(fme.getName()+" unclaimed land at ("+flocation.getCoordString()+") from the faction: "+otherFaction.getTag());
+			P.p.log(fme.getName()+" unclaimed land at ("+flocation.getCoordString()+") from the gang: "+otherFaction.getTag());
 	}
 	
 }

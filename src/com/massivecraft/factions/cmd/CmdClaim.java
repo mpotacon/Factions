@@ -16,7 +16,7 @@ public class CmdClaim extends FCommand
 		this.aliases.add("claim");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		this.optionalArgs.put("radius", "1");
 		
 		this.permission = Permission.CLAIM.node;
@@ -32,7 +32,7 @@ public class CmdClaim extends FCommand
 	public void perform()
 	{
 		// Read and validate input
-		final Faction forFaction = this.argAsFaction(0, myFaction);
+		final Faction forFaction = this.argAsFaction(0, myGang);
 		int radius = this.argAsInt(1, 1);
 
 		if (radius < 1)

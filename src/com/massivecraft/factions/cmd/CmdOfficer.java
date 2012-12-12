@@ -34,15 +34,15 @@ public class CmdOfficer extends FCommand
 		boolean permAny = Permission.OFFICER_ANY.has(sender, false);
 		Faction targetFaction = you.getFaction();
 
-		if (targetFaction != myFaction && !permAny)
+		if (targetFaction != myGang && !permAny)
 		{
-			msg("%s<b> is not a member in your faction.", you.describeTo(fme, true));
+			msg("%s<b> is not a member in your gang.", you.describeTo(fme, true));
 			return;
 		}
 		
 		if (fme != null && fme.getRole() != Rel.LEADER && !permAny)
 		{
-			msg("<b>You are not the faction leader.");
+			msg("<b>You are not the gang leader.");
 			return;
 		}
 
@@ -54,7 +54,7 @@ public class CmdOfficer extends FCommand
 
 		if (you.getRole() == Rel.LEADER)
 		{
-			msg("<b>The target player is a faction leader. Demote them first.");
+			msg("<b>The target player is a gang leader. Demote them first.");
 			return;
 		}
 
@@ -62,14 +62,14 @@ public class CmdOfficer extends FCommand
 		{
 			// Revoke
 			you.setRole(Rel.MEMBER);
-			targetFaction.msg("%s<i> is no longer officer in your faction.", you.describeTo(targetFaction, true));
+			targetFaction.msg("%s<i> is no longer officer in your gang.", you.describeTo(targetFaction, true));
 			msg("<i>You have removed officer status from %s<i>.", you.describeTo(fme, true));
 		}
 		else
 		{
 			// Give
 			you.setRole(Rel.OFFICER);
-			targetFaction.msg("%s<i> was promoted to officer in your faction.", you.describeTo(targetFaction, true));
+			targetFaction.msg("%s<i> was promoted to officer in your gang.", you.describeTo(targetFaction, true));
 			msg("<i>You have promoted %s<i> to officer.", you.describeTo(fme, true));
 		}
 	}

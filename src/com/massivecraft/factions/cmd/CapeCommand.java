@@ -33,13 +33,13 @@ public abstract class CapeCommand extends FCommand
 		this.capeFaction = null;
 		this.currentCape = null;
 		
-		if (this.myFaction == null && ! this.argIsSet(this.requiredArgs.size()))
+		if (this.myGang == null && ! this.argIsSet(this.requiredArgs.size()))
 		{
-			msg("<b>You must specify a faction from console.");
+			msg("<b>You must specify a Gang from console.");
 			return false;
 		}
 		
-		this.capeFaction = this.argAsFaction(this.requiredArgs.size(), this.myFaction);
+		this.capeFaction = this.argAsFaction(this.requiredArgs.size(), this.myGang);
 		if (this.capeFaction == null) return false;
 		
 		// Do we have permission to manage the cape of that faction? 

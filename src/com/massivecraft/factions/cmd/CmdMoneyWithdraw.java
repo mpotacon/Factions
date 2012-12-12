@@ -17,7 +17,7 @@ public class CmdMoneyWithdraw extends FCommand
 		this.aliases.add("withdraw");
 		
 		this.requiredArgs.add("amount");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		
 		this.permission = Permission.MONEY_WITHDRAW.node;
 		this.setHelpShort("withdraw money");
@@ -32,11 +32,11 @@ public class CmdMoneyWithdraw extends FCommand
 	public void perform()
 	{
 		double amount = this.argAsDouble(0, 0d);
-		EconomyParticipator faction = this.argAsFaction(1, myFaction);
+		EconomyParticipator faction = this.argAsFaction(1, myGang);
 		if (faction == null) return;
 		boolean success = Econ.transferMoney(fme, faction, fme, amount);
 
 		if (success && Conf.logMoneyTransactions)
-			P.p.log(ChatColor.stripColor(P.p.txt.parse("%s withdrew %s from the faction bank: %s", fme.getName(), Econ.moneyString(amount), faction.describeTo(null))));
+			P.p.log(ChatColor.stripColor(P.p.txt.parse("%s withdrew %s from the gang bank: %s", fme.getName(), Econ.moneyString(amount), faction.describeTo(null))));
 	}
 }

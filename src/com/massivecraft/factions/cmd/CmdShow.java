@@ -22,7 +22,7 @@ public class CmdShow extends FCommand
 		this.aliases.add("who");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		
 		this.permission = Permission.SHOW.node;
 		this.disableOnLock = false;
@@ -36,7 +36,7 @@ public class CmdShow extends FCommand
 	@Override
 	public void perform()
 	{
-		Faction faction = myFaction;
+		Faction faction = myGang;
 		if (this.argIsSet(0))
 		{
 			faction = this.argAsFaction(0);
@@ -44,7 +44,7 @@ public class CmdShow extends FCommand
 		}
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostShow, "to show faction information", "for showing faction information")) return;
+		if ( ! payForCommand(Conf.econCostShow, "to show gang information", "for showing gang information")) return;
 
 		Collection<FPlayer> admins = faction.getFPlayersWhereRole(Rel.LEADER);
 		Collection<FPlayer> mods = faction.getFPlayersWhereRole(Rel.OFFICER);
@@ -57,12 +57,12 @@ public class CmdShow extends FCommand
 		// TODO: Find the non default flags, and display them instead.
 		if (faction.getFlag(FFlag.PERMANENT))
 		{
-			msg("<a>This faction is permanent - remaining even with no members.");
+			msg("<a>This gang is permanent - remaining even with no members.");
 		}
 		
 		if (faction.getFlag(FFlag.PEACEFUL))
 		{
-			msg("<a>This faction is peaceful - in truce with everyone.");
+			msg("<a>This gang is peaceful - in truce with everyone.");
 		}
 		
 		msg("<a>Joining: <i>"+(faction.getOpen() ? "no invitation is needed" : "invitation is required"));

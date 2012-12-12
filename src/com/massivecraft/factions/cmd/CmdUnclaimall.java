@@ -34,27 +34,27 @@ public class CmdUnclaimall extends FCommand
 	{
 		if (Econ.shouldBeUsed())
 		{
-			double refund = Econ.calculateTotalLandRefund(myFaction.getLandRounded());
+			double refund = Econ.calculateTotalLandRefund(myGang.getLandRounded());
 			if(Conf.bankEnabled && Conf.bankFactionPaysLandCosts)
 			{
-				if ( ! Econ.modifyMoney(myFaction, refund, "to unclaim all faction land", "for unclaiming all faction land")) return;
+				if ( ! Econ.modifyMoney(myGang, refund, "to unclaim all gang land", "for unclaiming all gang land")) return;
 			}
 			else
 			{
-				if ( ! Econ.modifyMoney(fme      , refund, "to unclaim all faction land", "for unclaiming all faction land")) return;
+				if ( ! Econ.modifyMoney(fme      , refund, "to unclaim all gang land", "for unclaiming all gang land")) return;
 			}
 		}
 
-		LandUnclaimAllEvent unclaimAllEvent = new LandUnclaimAllEvent(myFaction, fme);
+		LandUnclaimAllEvent unclaimAllEvent = new LandUnclaimAllEvent(myGang, fme);
 	Bukkit.getServer().getPluginManager().callEvent(unclaimAllEvent);
 		// this event cannot be cancelled
 
-		Board.unclaimAll(myFaction.getId());
-		myFaction.msg("%s<i> unclaimed ALL of your faction's land.", fme.describeTo(myFaction, true));
+		Board.unclaimAll(myGang.getId());
+		myGang.msg("%s<i> unclaimed ALL of your gang's land.", fme.describeTo(myGang, true));
 		SpoutFeatures.updateTerritoryDisplayLoc(null);
 
 		if (Conf.logLandUnclaims)
-			P.p.log(fme.getName()+" unclaimed everything for the faction: "+myFaction.getTag());
+			P.p.log(fme.getName()+" unclaimed everything for the gang: "+myGang.getTag());
 	}
 	
 }

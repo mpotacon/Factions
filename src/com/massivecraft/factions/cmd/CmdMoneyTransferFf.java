@@ -16,8 +16,8 @@ public class CmdMoneyTransferFf extends FCommand
 		this.aliases.add("ff");
 		
 		this.requiredArgs.add("amount");
-		this.requiredArgs.add("faction");
-		this.requiredArgs.add("faction");
+		this.requiredArgs.add("gang");
+		this.requiredArgs.add("gang");
 		
 		//this.optionalArgs.put("", "");
 		
@@ -42,6 +42,6 @@ public class CmdMoneyTransferFf extends FCommand
 		boolean success = Econ.transferMoney(fme, from, to, amount);
 
 		if (success && Conf.logMoneyTransactions)
-			P.p.log(ChatColor.stripColor(P.p.txt.parse("%s transferred %s from the faction \"%s\" to the faction \"%s\"", fme.getName(), Econ.moneyString(amount), from.describeTo(null), to.describeTo(null))));
+			P.p.log(ChatColor.stripColor(P.p.txt.parse("%s transferred %s from the gang \"%s\" to the gang \"%s\"", fme.getName(), Econ.moneyString(amount), from.describeTo(null), to.describeTo(null))));
 	}
 }

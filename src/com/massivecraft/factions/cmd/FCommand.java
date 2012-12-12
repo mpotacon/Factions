@@ -23,7 +23,7 @@ public abstract class FCommand extends MCommand<P>
 	public boolean disableOnLock;
 	
 	public FPlayer fme;
-	public Faction myFaction;
+	public Faction myGang;
 	public boolean senderMustBeMember;
 	public boolean senderMustBeOfficer;
 	public boolean senderMustBeLeader;
@@ -51,12 +51,12 @@ public abstract class FCommand extends MCommand<P>
 		if (sender instanceof Player)
 		{
 			this.fme = FPlayers.i.get((Player)sender);
-			this.myFaction = this.fme.getFaction();
+			this.myGang = this.fme.getFaction();
 		}
 		else
 		{
 			this.fme = null;
-			this.myFaction = null;
+			this.myGang = null;
 		}
 		super.execute(sender, args, commandChain);
 	}
@@ -66,19 +66,19 @@ public abstract class FCommand extends MCommand<P>
 	{
 		if (p.getLocked() && this.disableOnLock)
 		{
-			msg("<b>Factions was locked by an admin. Please try again later.");
+			msg("<b>Gangs was locked by an admin. Please try again later.");
 			return false;
 		}
 		
 		if (this.isMoneyCommand && ! Conf.econEnabled)
 		{
-			msg("<b>Faction economy features are disabled on this server.");
+			msg("<b>Gang economy features are disabled on this server.");
 			return false;
 		}
 		
 		if (this.isMoneyCommand && ! Conf.bankEnabled)
 		{
-			msg("<b>The faction bank system is disabled on this server.");
+			msg("<b>The gang bank system is disabled on this server.");
 			return false;
 		}
 		
@@ -99,7 +99,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if ( ! fplayer.hasFaction())
 		{
-			sender.sendMessage(p.txt.parse("<b>You are not member of any faction."));
+			sender.sendMessage(p.txt.parse("<b>You are not member of any gang."));
 			return false;
 		}
 		
@@ -128,7 +128,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if ( ! fme.hasFaction())
 		{
-			sendMessage("You are not member of any faction.");
+			sendMessage("You are not member of any gang.");
 			return false;
 		}
 		return true;
@@ -257,7 +257,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>The faction or player \"<p>%s<b>\" could not be found.", name);
+			this.msg("<b>The gang or player \"<p>%s<b>\" could not be found.", name);
 		}
 		
 		return ret;
@@ -291,7 +291,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>The faction-flag \"<p>%s<b>\" could not be found.", name);
+			this.msg("<b>The gang-flag \"<p>%s<b>\" could not be found.", name);
 		}
 		
 		return ret;
@@ -325,7 +325,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>The faction-perm \"<p>%s<b>\" could not be found.", name);
+			this.msg("<b>The gang-perm \"<p>%s<b>\" could not be found.", name);
 		}
 		
 		return ret;
@@ -385,7 +385,7 @@ public abstract class FCommand extends MCommand<P>
 	{
 		if ( ! i.getFaction().equals(you.getFaction()))
 		{
-			i.sendMessage(p.txt.parse("%s <b>is not in the same faction as you.",you.describeTo(i, true)));
+			i.sendMessage(p.txt.parse("%s <b>is not in the same gang as you.",you.describeTo(i, true)));
 			return false;
 		}
 		
@@ -396,7 +396,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (you.getRole().equals(Rel.LEADER))
 		{
-			i.sendMessage(p.txt.parse("<b>Only the faction admin can do that."));
+			i.sendMessage(p.txt.parse("<b>Only the gang admin can do that."));
 		}
 		else if (i.getRole().equals(Rel.OFFICER))
 		{
@@ -411,7 +411,7 @@ public abstract class FCommand extends MCommand<P>
 		}
 		else
 		{
-			i.sendMessage(p.txt.parse("<b>You must be a faction moderator to do that."));
+			i.sendMessage(p.txt.parse("<b>You must be a gang moderator to do that."));
 		}
 		
 		return false;
@@ -423,7 +423,7 @@ public abstract class FCommand extends MCommand<P>
 		if ( ! Econ.shouldBeUsed() || this.fme == null || cost == 0.0 || fme.hasAdminMode()) return true;
 
 		if(Conf.bankEnabled && Conf.bankFactionPaysCosts && fme.hasFaction())
-			return Econ.modifyMoney(myFaction, -cost, toDoThis, forDoingThis);
+			return Econ.modifyMoney(myGang, -cost, toDoThis, forDoingThis);
 		else
 			return Econ.modifyMoney(fme, -cost, toDoThis, forDoingThis);
 	}
@@ -434,7 +434,7 @@ public abstract class FCommand extends MCommand<P>
 		if ( ! Econ.shouldBeUsed() || this.fme == null || cost == 0.0 || fme.hasAdminMode()) return true;
 
 		if(Conf.bankEnabled && Conf.bankFactionPaysCosts && fme.hasFaction())
-			return Econ.hasAtLeast(myFaction, cost, toDoThis);
+			return Econ.hasAtLeast(myGang, cost, toDoThis);
 		else
 			return Econ.hasAtLeast(fme, cost, toDoThis);
 	}

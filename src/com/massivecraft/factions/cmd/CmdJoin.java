@@ -17,7 +17,7 @@ public class CmdJoin extends FCommand
 		super();
 		this.aliases.add("join");
 		
-		this.requiredArgs.add("faction");
+		this.requiredArgs.add("gang");
 		this.optionalArgs.put("player", "you");
 		
 		this.permission = Permission.JOIN.node;
@@ -40,7 +40,7 @@ public class CmdJoin extends FCommand
 
 		if (!samePlayer  && ! Permission.JOIN_OTHERS.has(sender, false))
 		{
-			msg("<b>You do not have permission to move other players into a faction.");
+			msg("<b>You do not have permission to move other players into a gang.");
 			return;
 		}
 
@@ -52,27 +52,27 @@ public class CmdJoin extends FCommand
 
 		if (Conf.factionMemberLimit > 0 && faction.getFPlayers().size() >= Conf.factionMemberLimit)
 		{
-			msg(" <b>!<white> The faction %s is at the limit of %d members, so %s cannot currently join.", faction.getTag(fme), Conf.factionMemberLimit, fplayer.describeTo(fme, false));
+			msg(" <b>!<white> The gang %s is at the limit of %d members, so %s cannot currently join.", faction.getTag(fme), Conf.factionMemberLimit, fplayer.describeTo(fme, false));
 			return;
 		}
 
 		if (fplayer.hasFaction())
 		{
-			msg("<b>%s must leave %s current faction first.", fplayer.describeTo(fme, true), (samePlayer ? "your" : "their"));
+			msg("<b>%s must leave %s current gang first.", fplayer.describeTo(fme, true), (samePlayer ? "your" : "their"));
 			return;
 		}
 
 		if (!Conf.canLeaveWithNegativePower && fplayer.getPower() < 0)
 		{
-			msg("<b>%s cannot join a faction with a negative power level.", fplayer.describeTo(fme, true));
+			msg("<b>%s cannot join a gang with a negative power level.", fplayer.describeTo(fme, true));
 			return;
 		}
 
 		if( ! (faction.getOpen() || faction.isInvited(fplayer) || fme.hasAdminMode() || Permission.JOIN_ANY.has(sender, false)))
 		{
-			msg("<i>This faction requires invitation.");
+			msg("<i>This gang requires invitation.");
 			if (samePlayer)
-				faction.msg("%s<i> tried to join your faction.", fplayer.describeTo(faction, true));
+				faction.msg("%s<i> tried to join your gang.", fplayer.describeTo(faction, true));
 			return;
 		}
 
@@ -85,13 +85,13 @@ public class CmdJoin extends FCommand
 		if (joinEvent.isCancelled()) return;
 
 		// then make 'em pay (if applicable)
-		if (samePlayer && ! payForCommand(Conf.econCostJoin, "to join a faction", "for joining a faction")) return;
+		if (samePlayer && ! payForCommand(Conf.econCostJoin, "to join a gang", "for joining a gang")) return;
 
 		fme.msg("<i>%s successfully joined %s.", fplayer.describeTo(fme, true), faction.getTag(fme));
 
 		if (!samePlayer)
-			fplayer.msg("<i>%s moved you into the faction %s.", fme.describeTo(fplayer, true), faction.getTag(fplayer));
-		faction.msg("<i>%s joined your faction.", fplayer.describeTo(faction, true));
+			fplayer.msg("<i>%s moved you into the gang %s.", fme.describeTo(fplayer, true), faction.getTag(fplayer));
+		faction.msg("<i>%s joined your gang.", fplayer.describeTo(faction, true));
 
 		fplayer.resetFactionData();
 		fplayer.setFaction(faction);
@@ -100,9 +100,9 @@ public class CmdJoin extends FCommand
 		if (Conf.logFactionJoin)
 		{
 			if (samePlayer)
-				P.p.log("%s joined the faction %s.", fplayer.getName(), faction.getTag());
+				P.p.log("%s joined the gang %s.", fplayer.getName(), faction.getTag());
 			else
-				P.p.log("%s moved the player %s into the faction %s.", fme.getName(), fplayer.getName(), faction.getTag());
+				P.p.log("%s moved the player %s into the gang %s.", fme.getName(), fplayer.getName(), faction.getTag());
 		}
 	}
 }

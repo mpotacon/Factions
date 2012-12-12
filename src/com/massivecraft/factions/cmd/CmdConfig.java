@@ -314,7 +314,7 @@ public class CmdConfig extends FCommand
 
 						if (newPerm == null)
 						{
-							sendMessage("Cannot change \""+fieldName+"\" map: \""+value1+"\" is not a valid FPerm.");
+							sendMessage("Cannot change \""+fieldName+"\" map: \""+value1+"\" is not a valid GPerm.");
 							return;
 						}
 						if (newRel == null)

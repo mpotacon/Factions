@@ -65,8 +65,8 @@ public class FCmdRoot extends FCommand
 		
 		this.disableOnLock = false;
 		
-		this.setHelpShort("The faction base command");
-		this.helpLong.add(p.txt.parseTags("<i>This command contains all faction stuff."));
+		this.setHelpShort("The gang base command");
+		this.helpLong.add(p.txt.parseTags("<i>This command contains all gang stuff."));
 		
 		this.addSubCommand(P.p.cmdAutoHelp);
 		this.addSubCommand(this.cmdList);

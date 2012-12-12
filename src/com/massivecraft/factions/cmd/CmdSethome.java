@@ -14,7 +14,7 @@ public class CmdSethome extends FCommand
 		this.aliases.add("sethome");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		
 		this.permission = Permission.SETHOME.node;
 		this.disableOnLock = true;
@@ -30,11 +30,11 @@ public class CmdSethome extends FCommand
 	{
 		if ( ! Conf.homesEnabled)
 		{
-			fme.msg("<b>Sorry, Faction homes are disabled on this server.");
+			fme.msg("<b>Sorry, Gang homes are disabled on this server.");
 			return;
 		}
 		
-		Faction faction = this.argAsFaction(0, myFaction);
+		Faction faction = this.argAsFaction(0, myGang);
 		if (faction == null) return;
 		
 		// Can the player set the home for this faction?
@@ -50,20 +50,20 @@ public class CmdSethome extends FCommand
 			Board.getFactionAt(new FLocation(me)) != faction
 		)
 		{
-			fme.msg("<b>Sorry, your faction home can only be set inside your own claimed territory.");
+			fme.msg("<b>Sorry, your gang home can only be set inside your own claimed territory.");
 			return;
 		}
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostSethome, "to set the faction home", "for setting the faction home")) return;
+		if ( ! payForCommand(Conf.econCostSethome, "to set the gang home", "for setting the gang home")) return;
 
 		faction.setHome(me.getLocation());
 		
-		faction.msg("%s<i> set the home for your faction. You can now use:", fme.describeTo(myFaction, true));
+		faction.msg("%s<i> set the home for your faction. You can now use:", fme.describeTo(myGang, true));
 		faction.sendMessage(p.cmdBase.cmdHome.getUseageTemplate());
-		if (faction != myFaction)
+		if (faction != myGang)
 		{
-			fme.msg("<b>You have set the home for the "+faction.getTag(fme)+"<i> faction.");
+			fme.msg("<b>You have set the home for the "+faction.getTag(fme)+"<i> gang.");
 		}
 	}
 	

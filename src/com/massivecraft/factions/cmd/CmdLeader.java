@@ -18,7 +18,7 @@ public class CmdLeader extends FCommand
 		this.aliases.add("leader");
 		
 		this.requiredArgs.add("player");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		
 		this.permission = Permission.LEADER.node;
 		this.disableOnLock = true;
@@ -35,7 +35,7 @@ public class CmdLeader extends FCommand
 		FPlayer newLeader = this.argAsBestFPlayerMatch(0);
 		if (newLeader == null) return;
 		
-		Faction targetFaction = this.argAsFaction(1, myFaction);
+		Faction targetFaction = this.argAsFaction(1, myGang);
 		if (targetFaction == null) return;
 		
 		FPlayer targetFactionCurrentLeader = targetFaction.getFPlayerLeader();
@@ -48,15 +48,15 @@ public class CmdLeader extends FCommand
 		else
 		{
 			// Follow the standard rules
-			if (fme.getRole() != Rel.LEADER || targetFaction != myFaction)
+			if (fme.getRole() != Rel.LEADER || targetFaction != myGang)
 			{
-				sender.sendMessage(p.txt.parse("<b>You must be leader of the faction to %s.", this.getHelpShort()));
+				sender.sendMessage(p.txt.parse("<b>You must be leader of the gang to %s.", this.getHelpShort()));
 				return;
 			}
 			
-			if (newLeader.getFaction() != myFaction)
+			if (newLeader.getFaction() != myGang)
 			{
-				msg("%s<i> is not a member in the faction.", newLeader.describeTo(fme, true));
+				msg("%s<i> is not a member in the gang.", newLeader.describeTo(fme, true));
 				return;
 			}
 			
@@ -79,8 +79,8 @@ public class CmdLeader extends FCommand
 		if (targetFactionCurrentLeader == newLeader)
 		{
 			targetFaction.promoteNewLeader();
-			msg("<i>You have demoted %s<i> from the position of faction leader.", newLeader.describeTo(fme, true));
-			newLeader.msg("<i>You have been demoted from the position of faction leader by %s<i>.", senderIsConsole ? "a server admin" : fme.describeTo(newLeader, true));
+			msg("<i>You have demoted %s<i> from the position of gang leader.", newLeader.describeTo(fme, true));
+			newLeader.msg("<i>You have been demoted from the position of gang leader by %s<i>.", senderIsConsole ? "a server admin" : fme.describeTo(newLeader, true));
 			return;
 		}
 
@@ -91,7 +91,7 @@ public class CmdLeader extends FCommand
 		}
 		newLeader.setFaction(targetFaction);
 		newLeader.setRole(Rel.LEADER);
-		msg("<i>You have promoted %s<i> to the position of faction leader.", newLeader.describeTo(fme, true));
+		msg("<i>You have promoted %s<i> to the position of gang leader.", newLeader.describeTo(fme, true));
 		
 		// Inform all players
 		for (FPlayer fplayer : FPlayers.i.getOnline())

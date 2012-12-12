@@ -13,7 +13,7 @@ public class CmdFlag extends FCommand
 		this.aliases.add("flag");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		this.optionalArgs.put("flag", "all");
 		this.optionalArgs.put("yes/no", "read");
 		
@@ -29,7 +29,7 @@ public class CmdFlag extends FCommand
 	@Override
 	public void perform()
 	{
-		Faction faction = myFaction;
+		Faction faction = myGang;
 		if (this.argIsSet(0))
 		{
 			faction = this.argAsFaction(0);

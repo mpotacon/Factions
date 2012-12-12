@@ -37,7 +37,7 @@ public class CmdTag extends FCommand
 		String tag = this.argAsString(0);
 		
 		// TODO does not first test cover selfcase?
-		if (Factions.i.isTagTaken(tag) && ! MiscUtil.getComparisonString(tag).equals(myFaction.getComparisonTag()))
+		if (Factions.i.isTagTaken(tag) && ! MiscUtil.getComparisonString(tag).equals(myGang.getComparisonTag()))
 		{
 			msg("<b>That tag is already taken");
 			return;
@@ -52,7 +52,7 @@ public class CmdTag extends FCommand
 		}
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make sure they can pay
-		if ( ! canAffordCommand(Conf.econCostTag, "to change the faction tag")) return;
+		if ( ! canAffordCommand(Conf.econCostTag, "to change the gang tag")) return;
 
 		// trigger the faction rename event (cancellable)
 		FactionRenameEvent renameEvent = new FactionRenameEvent(fme, tag);
@@ -60,25 +60,25 @@ public class CmdTag extends FCommand
 		if(renameEvent.isCancelled()) return;
 
 		// then make 'em pay (if applicable)
-		if ( ! payForCommand(Conf.econCostTag, "to change the faction tag", "for changing the faction tag")) return;
+		if ( ! payForCommand(Conf.econCostTag, "to change the gang tag", "for changing the gang tag")) return;
 
-		String oldtag = myFaction.getTag();
-		myFaction.setTag(tag);
+		String oldtag = myGang.getTag();
+		myGang.setTag(tag);
 
 		// Inform
-		myFaction.msg("%s<i> changed your faction tag to %s", fme.describeTo(myFaction, true), myFaction.getTag(myFaction));
+		myGang.msg("%s<i> changed your gang tag to %s", fme.describeTo(myGang, true), myGang.getTag(myGang));
 		for (Faction faction : Factions.i.get())
 		{
-			if (faction == myFaction)
+			if (faction == myGang)
 			{
 				continue;
 			}
-			faction.msg("<i>The faction %s<i> changed their name to %s.", fme.getColorTo(faction)+oldtag, myFaction.getTag(faction));
+			faction.msg("<i>The gang %s<i> changed their name to %s.", fme.getColorTo(faction)+oldtag, myGang.getTag(faction));
 		}
 
 		if (Conf.spoutFactionTagsOverNames)
 		{
-			SpoutFeatures.updateTitle(myFaction, null);
+			SpoutFeatures.updateTitle(myGang, null);
 		}
 	}
 	

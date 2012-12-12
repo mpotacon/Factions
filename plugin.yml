@@ -1,12 +1,12 @@
-name: Factions
+name: Factions [gangs]
 version: 1.7.9b_beta
 main: com.massivecraft.factions.P
-authors: [Olof Larsson, Brett Flannigan]
+authors: [Olof Larsson, Brett Flannigan] Modifed [mpotacon]
 softdepend: [PermissionsEx, Permissions, Essentials, EssentialsChat, HeroChat, iChat, LocalAreaChat, LWC, nChat, ChatManager, CAPI, AuthMe, Vault, Spout, WorldEdit, WorldGuard, AuthDB, CaptureThePoints, CombatTag]
 commands:
-  factions:
+  gangs:
     description: Reference command for Factions.
-    aliases: [f]
+    aliases: [g]
 permissions:
   factions.kit.admin:
     description: All faction permissions.

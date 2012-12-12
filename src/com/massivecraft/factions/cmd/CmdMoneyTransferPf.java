@@ -13,16 +13,16 @@ public class CmdMoneyTransferPf extends FCommand
 {
 	public CmdMoneyTransferPf()
 	{
-		this.aliases.add("pf");
+		this.aliases.add("pg");
 		
 		this.requiredArgs.add("amount");
 		this.requiredArgs.add("player");
-		this.requiredArgs.add("faction");
+		this.requiredArgs.add("gang");
 		
 		//this.optionalArgs.put("", "");
 		
 		this.permission = Permission.MONEY_P2F.node;
-		this.setHelpShort("transfer p -> f");
+		this.setHelpShort("transfer p -> g");
 		
 		senderMustBePlayer = false;
 		senderMustBeMember = false;
@@ -42,6 +42,6 @@ public class CmdMoneyTransferPf extends FCommand
 		boolean success = Econ.transferMoney(fme, from, to, amount);
 
 		if (success && Conf.logMoneyTransactions)
-			P.p.log(ChatColor.stripColor(P.p.txt.parse("%s transferred %s from the player \"%s\" to the faction \"%s\"", fme.getName(), Econ.moneyString(amount), from.describeTo(null), to.describeTo(null))));
+			P.p.log(ChatColor.stripColor(P.p.txt.parse("%s transferred %s from the player \"%s\" to the gang \"%s\"", fme.getName(), Econ.moneyString(amount), from.describeTo(null), to.describeTo(null))));
 	}
 }
