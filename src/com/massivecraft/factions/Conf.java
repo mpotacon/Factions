@@ -74,8 +74,8 @@ public class Conf
 	public static String chatTagFormat = "%s"+ChatColor.WHITE; // This one is almost deprecated now right? or is it?
 	
 	// Herochat
-	public static String herochatFactionName = "Faction";
-	public static String herochatFactionNick = "F";
+	public static String herochatFactionName = "Gang";
+	public static String herochatFactionNick = "G";
 	public static String herochatFactionFormat = "{color}[&l{nick}&r{color} &l{faction_roleprefix}&r{color}{faction_title_pr}{sender}{color}] &f{msg}";
 	public static ChatColor herochatFactionColor = ChatColor.GREEN;
 	public static int herochatFactionDistance = 0;
@@ -259,7 +259,7 @@ public class Conf
 	
 	static
 	{
-		baseCommandAliases.add("f");
+		baseCommandAliases.add("g");
 		
 		factionFlagDefaults = new LinkedHashMap<FFlag, Boolean>();
 		for (FFlag flag : FFlag.values())

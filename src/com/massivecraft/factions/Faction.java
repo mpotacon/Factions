@@ -79,7 +79,7 @@ public class Faction extends Entity implements EconomyParticipator
 		if (!Conf.homesMustBeInClaimedTerritory || this.home == null || (this.home.getLocation() != null && Board.getFactionAt(new FLocation(this.home.getLocation())) == this))
 			return;
 
-		msg("<b>Your faction home has been un-set since it is no longer in your territory.");
+		msg("<b>Your gang home has been un-set since it is no longer in your territory.");
 		this.home = null;
 	}
 	
@@ -88,7 +88,7 @@ public class Faction extends Entity implements EconomyParticipator
 	public double money;
 	public String getAccountId()
 	{
-		String aid = "faction-"+this.getId();
+		String aid = "gang-"+this.getId();
 
 		// We need to override the default money given to players.
 		if ( ! Econ.hasAccount(aid))
@@ -196,7 +196,7 @@ public class Faction extends Entity implements EconomyParticipator
 		this.invites = new HashSet<String>();
 		this.open = Conf.newFactionsDefaultOpen;
 		this.tag = "???";
-		this.description = "Default faction description :(";
+		this.description = "Default Gang description :(";
 		this.money = 0.0;
 		this.powerBoost = 0.0;
 		this.flagOverrides = new LinkedHashMap<FFlag, Boolean>();
@@ -502,8 +502,8 @@ public class Faction extends Entity implements EconomyParticipator
 			if (oldLeader != null)
 				oldLeader.setRole(Rel.MEMBER);
 			replacements.get(0).setRole(Rel.LEADER);
-			this.msg("<i>Faction leader <h>%s<i> has been removed. %s<i> has been promoted as the new faction leader.", oldLeader == null ? "" : oldLeader.getName(), replacements.get(0).getName());
-			P.p.log("Faction "+this.getTag()+" ("+this.getId()+") leader was removed. Replacement leader: "+replacements.get(0).getName());
+			this.msg("<i>Gang leader <h>%s<i> has been removed. %s<i> has been promoted as the new gang leader.", oldLeader == null ? "" : oldLeader.getName(), replacements.get(0).getName());
+			P.p.log("Gang "+this.getTag()+" ("+this.getId()+") leader was removed. Replacement leader: "+replacements.get(0).getName());
 		}
 	}
 

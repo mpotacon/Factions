@@ -14,7 +14,7 @@ public abstract class CapeCommand extends FCommand
 	
 	public CapeCommand()
 	{
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("gang", "your");
 		
 		this.disableOnLock = true;
 		

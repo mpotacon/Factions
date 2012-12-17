@@ -1,11 +1,11 @@
-name: Factions [gangs]
+name: Gangs
 version: 1.7.9b_beta
 main: com.massivecraft.factions.P
-authors: [Olof Larsson, Brett Flannigan] Modifed [mpotacon]
+authors: [Olof Larsson, Brett Flannigan, moded by mpotacon]
 softdepend: [PermissionsEx, Permissions, Essentials, EssentialsChat, HeroChat, iChat, LocalAreaChat, LWC, nChat, ChatManager, CAPI, AuthMe, Vault, Spout, WorldEdit, WorldGuard, AuthDB, CaptureThePoints, CombatTag]
 commands:
   gangs:
-    description: Reference command for Factions.
+    description: Reference command for gangs.
     aliases: [g]
 permissions:
   factions.kit.admin:
@@ -37,12 +37,12 @@ permissions:
       factions.kit.fullplayer: true
       factions.adminmode: true
   factions.kit.fullplayer:
-    description: Can also create new factions.
+    description: Can also create new gang.
     children:
       factions.kit.halfplayer: true
       factions.create: true
   factions.kit.halfplayer:
-    description: Can do all but create factions.
+    description: Can do all but create gangs.
     children:
       factions.access: true
       factions.access.view: true
@@ -79,84 +79,84 @@ permissions:
       factions.unclaimall: true
       factions.version: true
   factions.access:
-    description: grant territory access for your faction, with the proper fperm
+    description: grant territory access for your gang, with the proper Gperm
   factions.access.any:
-    description: grant territory access for any faction
+    description: grant territory access for any gang
   factions.access.view:
-    description: view territory access info for your faction
+    description: view territory access info for your gang
   factions.adminmode:
     description: enable admin bypass mode
   factions.autoclaim:
     description: auto-claim land as you walk around
   factions.cape:
-    description: manage faction capes
+    description: manage gang capes
   factions.cape.*:
     children:
       factions.cape.get: true
       factions.cape.set: true
       factions.cape.remove: true
   factions.cape.get:
-    description: get faction cape
+    description: get gang cape
   factions.cape.set:
-    description: set faction cape
+    description: set gang cape
   factions.cape.remove:
-    description: remove faction cape
+    description: remove gang cape
   factions.claim:
     description: claim land where you are standing
   factions.config:
     description: change a conf.json setting
   factions.create:
-    description: create a new faction
+    description: create a new gang
   factions.deinvite:
     description: remove a pending invitation
   factions.description:
-    description: change the faction description
+    description: change the gang description
   factions.disband:
-    description: disband a faction
+    description: disband a gang
   factions.flag:
-    description: read faction flags
+    description: read gang flags
   factions.flag.set:
-    description: set faction flags
+    description: set gang flags
   factions.help:
     description: display a help page
   factions.home:
-    description: teleport to the faction home
+    description: teleport to the gang home
   factions.invite:
-    description: invite a player to your faction
+    description: invite a player to your gang
   factions.join:
-    description: join a faction
+    description: join a gang
   factions.join.any:
-    description: join any faction, bypassing invitation process for closed factions
+    description: join any gang, bypassing invitation process for closed gangs
   factions.join.others:
-    description: specify another player in the join command, to move them to the specified faction
+    description: specify another player in the join command, to move them to the specified gang
   factions.kick:
-    description: kick a player from the faction
+    description: kick a player from the gang
   factions.leader:
     description: hand over leader rights
   factions.leader.any:
-    description: give or revoke leader status for any player in any faction
+    description: give or revoke leader status for any player in any gang
   factions.leave:
-    description: leave your faction
+    description: leave your gang
   factions.list:
-    description: see a list of the factions
+    description: see a list of the gangs
   factions.lock:
     description: lock all write stuff
   factions.map:
     description: show the territory map, and set optional auto update
   factions.money.balance:
-    description: show your factions current money balance
+    description: show your gangs current money balance
   factions.money.balance.any:
-    description: show money balance for factions other than your own
+    description: show money balance for gangs other than your own
   factions.money.deposit:
-    description: deposit money into a faction bank
+    description: deposit money into a gang bank
   factions.money.f2f:
-    description: transfer money from faction to faction
+    description: transfer money from gang to gang
   factions.money.f2p:
-    description: transfer money from faction to player
+    description: transfer money from gang to player
   factions.money.p2f:
-    description: transfer money from player to faction
+    description: transfer money from player to gang
   factions.money.withdraw:
-    description: withdraw money from your faction bank
+    description: withdraw money from your gang bank
   factions.money.*:
     children:
       factions.money.balance: true
@@ -169,19 +169,19 @@ permissions:
   factions.officer:
     description: give or revoke officer rights
   factions.officer.any:
-    description: give or revoke officer rights for any player in any faction
+    description: give or revoke officer rights for any player in any gang
   factions.open:
     description: switch if invitation is required to join
   factions.perm:
-    description: change faction permissions
+    description: change gang permissions
   factions.power:
     description: show player power info
   factions.power.any:
     description: view an other players power level
   factions.powerboost:
-    description: apply permanent power bonus/penalty to specified player or faction
+    description: apply permanent power bonus/penalty to specified player or gang
   factions.relation:
-    description: set relation wish to another faction
+    description: set relation wish to another gang
   factions.reload:
     description: reload data file(s) from disk
   factions.save:
@@ -189,16 +189,16 @@ permissions:
   factions.seechunk:
     description: see the chunk you stand in
   factions.sethome:
-    description: set the faction home
+    description: set the gang home
   factions.show:
-    description: show faction information
+    description: show gang information
   factions.tag:
-    description: change the faction tag
+    description: change the gang tag
   factions.title:
     description: set or remove a players title
   factions.unclaim:
     description: unclaim the land where you are standing
   factions.unclaimall:
-    description: unclaim all of your factions land
+    description: unclaim all of your gangs land
   factions.version:
     description: see the version of the plugin

@@ -217,7 +217,7 @@ public class P extends MPlugin
 		if (split == null || split.length == 0) return true;
 
 		// otherwise, needs to be handled; presumably another plugin directly ran the command
-		String cmd = Conf.baseCommandAliases.isEmpty() ? "/f" : "/" + Conf.baseCommandAliases.get(0);
+		String cmd = Conf.baseCommandAliases.isEmpty() ? "/g" : "/" + Conf.baseCommandAliases.get(0);
 		return handleCommand(sender, cmd + " " + TextUtil.implode(Arrays.asList(split), " "), false);
 	}
 
